@@ -5,22 +5,32 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: Current File",
+            "name": "self",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/launch_json_launcher.py",
+            "program": "${file}",
             "args": [
-                "1",
+                'hoge',
             ],
             "console": "integratedTerminal"
         },
-        {
+         {
             "name": "sample",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/hello.py",
             "args": [
                 'hoge',
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/ljl/__init__.py",
+            "args": [
+                "1",
             ],
             "console": "integratedTerminal"
         },
