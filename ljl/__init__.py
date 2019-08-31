@@ -16,25 +16,33 @@ __version__ = '0.0.1'
 
 class Configuration(NamedTuple):
     type: str
-    request: str
+    request: str # launch or attach
     name: str
-    program: str
+    program: str = ''
     args: List[str] = []
     console: str = ''
     stopOnEntry: bool = False
     cwd: str = ''
     env: Dict[str, str] = {}
+    url: str = ""
+    webRoot: str = ""
+
 
     def launch(self):
-        # print(self)
-        cmd = f'{self.program} {" ".join(self.args)}'
         if 'PATH' in self.env:
             self.env['PATH'] = self.env['PATH'].replace('/', '\\')
             # print(self.env['PATH'])
-        env = os.environ
-        env.update(self.env)
-        print(cmd)
-        subprocess.run(cmd, shell=True, cwd=self.cwd, env=env)
+        # print(self)
+        if self.type == 'chrome':
+            chrome = r'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
+            cmd = [chrome, self.url, '--new-window']
+            subprocess.run(cmd)
+        else:
+            cmd = f'{self.program} {" ".join(self.args)}'
+            env = os.environ
+            env.update(self.env)
+            print(cmd)
+            subprocess.run(cmd, shell=True, cwd=self.cwd, env=env)
 
 
 def launch(launch_json: pathlib.Path, index: int = 0, open_file: str = '') -> None:
